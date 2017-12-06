@@ -75,5 +75,7 @@
         randomStudent,
     ], 10);
 
-    alert("Done running tests!\nCheck the console for results.");
+    if (typeof alert !== "undefined") {
+        alert("Done running tests!\nCheck the console for results.");
+    }
 })(100);
