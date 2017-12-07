@@ -89,7 +89,7 @@
             document.body.appendChild(div);
             const button = document.createElement('button');
             div.appendChild(button);
-            button.innerText = func.name;
+            button.innerText = func.toString().slice(6);
             button.addEventListener('click', (event) => {
                 const result = document.createElement('p');
                 div.appendChild(result);
