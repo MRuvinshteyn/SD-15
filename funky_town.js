@@ -1,4 +1,4 @@
-(function(i, s, o, g, r, a, m) {
+(function(test) {
     "use strict";
     /*
      * Michael Ruvinshteyn and Khyber Sen
@@ -39,43 +39,63 @@
         return [...this.keys()];
     };
 
-    const testFibonacci = function(n) {
-        console.log("Testing fibonacci:");
-        Array(n).indices().map(
-            n => console.log("The " + n + "th fibonacci number is: " + fibonacci(n))
-        );
-        console.log();
-    };
+    if (test) {
+        const testFibonacci = function(n) {
+            console.log("Testing fibonacci:");
+            Array(n).indices().map(
+                n => console.log("The " + n + "th fibonacci number is: " + fibonacci(n))
+            );
+            console.log();
+        };
 
-    const testGcd = function(a, b) {
-        console.log("Testing gcd:");
-        console.log("gcd(" + a + ", " + b + ") = " + gcd(a, b));
-        console.log();
-    };
+        const testGcd = function(a, b) {
+            console.log("Testing gcd:");
+            console.log("gcd(" + a + ", " + b + ") = " + gcd(a, b));
+            console.log();
+        };
 
-    const testRandomStudent = function(students, n) {
-        console.log("Testing randomStudent:");
-        console.log("Choosing " + n + " random students from [" + students.join(", ") + "]");
-        for (let i = 0; i < n; i++) {
-            console.log("Random student #" + i + ": " + randomStudent(students));
+        const testRandomStudent = function(students, n) {
+            console.log("Testing randomStudent:");
+            console.log("Choosing " + n + " random students from [" + students.join(", ") + "]");
+            for (let i = 0; i < n; i++) {
+                console.log("Random student #" + i + ": " + randomStudent(students));
+            }
+            console.log();
+        };
+
+        testFibonacci(100);
+
+        testGcd(5678, 680);
+        console.log("We decided functions count as students, too.");
+        testRandomStudent([
+            "Khyber",
+            "Sen",
+            "Michael",
+            "Ruvinshteyn",
+            fibonacci,
+            gcd,
+            randomStudent,
+        ], 10);
+
+        if (typeof alert !== "undefined") {
+            alert("Done running tests!\nCheck the console for results.");
         }
-        console.log();
-    };
-
-    testFibonacci(i);
-    testGcd(5678, 680);
-    console.log("We decided functions count as students, too.");
-    testRandomStudent([
-        "Khyber",
-        "Sen",
-        "Michael",
-        "Ruvinshteyn",
-        fibonacci,
-        gcd,
-        randomStudent,
-    ], 10);
-
-    if (typeof alert !== "undefined") {
-        alert("Done running tests!\nCheck the console for results.");
+    } else {
+        const testFibonacci = () => fibonacci(10);
+        const testGcd = () => gcd(5678, 680);
+        const testRandomStudent = () => randomStudent(["Khyber", "Sen", "Michael", "Ruvinshteyn"]);
+        [testFibonacci, testGcd, testRandomStudent].forEach(func => {
+            const div = document.createElement('div');
+            document.body.appendChild(div);
+            const button = document.createElement('button');
+            div.appendChild(button);
+            button.innerText = func.name;
+            button.addEventListener('click', (event) => {
+                const result = document.createElement('p');
+                div.appendChild(result);
+                result.innerText = func().toString();
+            });
+            new Array(3).fill(0).forEach(() => document.body.appendChild(document.createElement('br')));
+        });
     }
-})(100);
+})(false);
