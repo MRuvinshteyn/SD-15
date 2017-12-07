@@ -1,4 +1,4 @@
-(function(test) {
+(function(window, test) {
     "use strict";
     /*
      * Michael Ruvinshteyn and Khyber Sen
@@ -6,7 +6,7 @@
      * 2017-12-06
      */
 
-    const fibonacci = function(n) {
+    const fibonacci = window.fibonacci = function(n) {
         // sets the first two numbers to be used for further computation
         let a = 0;
         let b = 1;
@@ -19,7 +19,7 @@
         return a;
     };
 
-    const gcd = function(a, b) {
+    const gcd = window.gcd = function(a, b) {
         // checks if second number is 0 -> return first number
         // otherwise return gcd of the second number and the remainder of f/s (a/b)
         while (b !== 0) {
@@ -30,13 +30,17 @@
         return a;
     };
 
-    const randomStudent = function(students) {
+    const randomStudent = window.randomStudent = function(students) {
         // returns student at random index of a given list
         return students[Math.floor(Math.random() * students.length)];
     };
 
     Array.prototype.indices = function() {
         return [...this.keys()];
+    };
+
+    Object.prototype.print = function() {
+        console.log(this);
     };
 
     if (test) {
@@ -91,6 +95,7 @@
             div.appendChild(button);
             button.innerText = func.toString().slice(6);
             button.addEventListener('click', (event) => {
+                // event.print();
                 const result = document.createElement('p');
                 div.appendChild(result);
                 result.innerText = func().toString();
@@ -98,4 +103,4 @@
             new Array(3).fill(0).forEach(() => document.body.appendChild(document.createElement('br')));
         });
     }
-})(false);
+})(window, false);
