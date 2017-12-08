@@ -29,26 +29,26 @@ var random_student_selector = function() {
 function fibonacciIn() {
 	var elem = document.getElementById('fibIn').value;
     var para = document.createElement('p');
-    var result = document.createTextNode(fibonacci(elem));
+    var result = document.createTextNode("The " + elem + "th fibonacci number is " + fibonacci(elem));
     para.appendChild(result);
     document.getElementById('fib').appendChild(para);
-	console.log("The " + elem + "th fibonacci number: " + fibonacci(elem));
+	console.log(elem + " ==> " + fibonacci(elem));
 };
 
 function gcdIn() {
     var elem1 = document.getElementById('gcd1').value;
     var elem2 = document.getElementById('gcd2').value;
     var para = document.createElement('p');
-    var result = document.createTextNode(gcd(elem1,elem2));
+    var result = document.createTextNode("GCD of " + elem1 + " and " + elem2 + ": " + gcd(elem1,elem2));
     para.appendChild(result);
     document.getElementById('gcd').appendChild(para);
-    console.log("gcd of " + elem1 + " and " + elem2 + ": " + gcd(elem1,elem2));
+    console.log(elem1 + ", " + elem2 + " ==> " + gcd(elem1,elem2));
 }
 
 function random_studentIn() {
     var para = document.createElement('p');
     var ret = random_student_selector();
-    var result = document.createTextNode(ret);
+    var result = document.createTextNode("Random student from given list: " + ret);
     para.appendChild(result);
     document.getElementById('random_student').appendChild(para);
     console.log("Random student from given list: " + ret);
