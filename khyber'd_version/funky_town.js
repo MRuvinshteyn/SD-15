@@ -8,6 +8,7 @@
 
     const fibonacci = window.fibonacci = function(n) {
         // sets the first two numbers to be used for further computation
+        n |= 0;
         let a = 0;
         let b = 1;
         // loops until function reaches nth number in sequence
@@ -22,6 +23,8 @@
     const gcd = window.gcd = function(a, b) {
         // checks if second number is 0 -> return first number
         // otherwise return gcd of the second number and the remainder of f/s (a/b)
+        a |= 0;
+        b |= 0;
         while (b !== 0) {
             const temp = b;
             b = a % b;
@@ -43,7 +46,7 @@
         console.log(this);
     };
 
-    if (test) {
+    if (test === true) {
         const testFibonacci = function(n) {
             console.log("Testing fibonacci:");
             Array(n).indices().map(
@@ -85,21 +88,23 @@
             alert("Done running tests!\nCheck the console for results.");
         }
     } else {
-        const testFibonacci = () => fibonacci(10);
-        const testGcd = () => gcd(5678, 680);
-        const testRandomStudent = () => randomStudent(["Khyber", "Sen", "Michael", "Ruvinshteyn"]);
-        [testFibonacci, testGcd, testRandomStudent].forEach(func => {
+        [
+            () => fibonacci(10),
+            () => gcd(5678, 680),
+            () => randomStudent(["Khyber", "Sen", "Michael", "Ruvinshteyn"]),
+        ].forEach(func => {
             const div = document.createElement('div');
             document.body.appendChild(div);
-            const button = document.createElement('button');
-            div.appendChild(button);
-            button.innerText = func.toString().slice(6);
-            button.addEventListener('click', (event) => {
-                // event.print();
-                const result = document.createElement('p');
-                div.appendChild(result);
-                result.innerText = func().toString();
+            const button = document.createElement('button', {
+                innerText: func.toString().slice(6),
+                onclick: event => {
+                    // event.print();
+                    const result = document.createElement('p');
+                    div.appendChild(result);
+                    result.innerText = func().toString();
+                }
             });
+            div.appendChild(button);
             new Array(3).fill(0).forEach(() => document.body.appendChild(document.createElement('br')));
         });
     }
